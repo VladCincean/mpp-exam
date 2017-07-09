@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="filename">./log/exam.log</Property>
+        <Property name="filenamePattern">log/exam-%i.log</Property>
+        <Property name="pattern">%d{ISO8601} %-5p [%t]: %-36.36c{1} - %m %n
+        </Property>
+    </Properties>
+
+    <Appenders>
+        <!-- ======= -->
+        <!-- CONSOLE -->
+        <!-- ======= -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+        <!-- ========= -->
+        <!-- ROOT File -->
+        <!-- ========= -->
+        <RollingFile name="File" fileName="${filename}"
+                     filePattern="${filenamePattern}">
+            <PatternLayout pattern="${pattern}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <File name="File" fileName="log/exam.log" append="true">
+            <PatternLayout pattern="%d{ISO8601} %-5p [%t]: %-36.36c{1} - %m %n"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+
+        <!-- Spring framework -->
+        <!--<Logger name="org.hibernate.stat" level="INFO" />-->
+        <Logger name="org.springframework.data" level="WARN"/>
+        <Logger name="org.springframework.web" level="WARN"/>
+        <Logger name="org.springframework.http.converter.json" level="WARN"/>
+        <Logger name="com.fasterxml.jackson.databind" level="WARN"/>
+        <Logger name="ro.droptable.exam" level="TRACE"/>
+
+        <!-- ROOT -->
+        <Root level="WARN">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+
+    </Loggers>
+</Configuration>

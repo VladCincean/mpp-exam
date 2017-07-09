@@ -1,0 +1,2 @@
+include ':exam-core'
+project(':exam-core').projectDir = new File(settingsDir, '../exam-core')

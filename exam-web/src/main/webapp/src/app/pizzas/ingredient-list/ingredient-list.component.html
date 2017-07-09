@@ -1,0 +1,9 @@
+<div>
+  <h3>Ingredients:</h3>
+  <ol>
+    <li *ngFor="let ingredient of ingredients">
+      {{ingredient.name}}
+    </li>
+  </ol>
+  <button (click)="goBack()">Back</button>
+</div>
