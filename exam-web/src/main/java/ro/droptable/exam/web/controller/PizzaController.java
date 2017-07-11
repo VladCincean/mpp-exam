@@ -132,26 +132,5 @@ public class PizzaController {
 
         return new PizzasDto(pizzaConverter.convertModelsToDtos(pizzas));
     }
-
-    // TODO: DONE: backup
-//    @RequestMapping(value = "pizzas/deleteSelected", method = RequestMethod.PUT)
-//    public PizzasDto deleteSelected(
-//            @RequestBody final Map<String, PizzasDto> pizzasDtoMap
-//    ) {
-//        log.trace("deleteSelected: pizzasDtoMap = {}", pizzasDtoMap);
-//
-//        PizzasDto pizzasDto = pizzasDtoMap.get("pizzas");
-//        log.trace("deleteSelected: pizzasDto = {}", pizzasDto);
-//
-//        Set<Long> idsToDelete = this.pizzaConverter.convertDTOsToIDs(pizzasDto.getPizzas());
-//        for (Long id : idsToDelete) {
-//            this.pizzaService.deletePizza(id);
-//        }
-//
-//        List<Pizza> pizzas = pizzaService.findAll();
-//
-//        log.trace("deleteSelected: pizzas = {}", pizzas);
-//
-//        return new PizzasDto(pizzaConverter.convertModelsToDtos(pizzas));
-//    }
+    
 }
