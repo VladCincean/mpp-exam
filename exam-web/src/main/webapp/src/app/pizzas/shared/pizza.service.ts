@@ -12,6 +12,8 @@ export class PizzaService {
   private pizzasUrl = 'http://localhost:8080/api/pizzas';
   private pizzasUpdateAllUrl = 'http://localhost:8080/api/pizzas/updateAll';
   private pizzaIngredientsUrl = 'http://localhost:8080/api/pizzas/ingredients';
+  private pizzaDeleteSelectedUrl = 'http://localhost:8080/api/pizzas/deleteSelected';
+
   private headers = new Headers({
     'Content-Type': 'application/json'
   });
@@ -92,6 +94,28 @@ export class PizzaService {
         JSON.stringify({"price": priceAll}),
         {headers: this.headers}
       ).map(this.extractPizzasData)
+      .catch(this.handleError);
+  }
+
+  deleteSelected(pizzas: Pizza[]): Observable<Pizza[]> {
+    console.log('service: deleteSelected: pizzas: ' + JSON.stringify({"pizzas": pizzas}));
+
+    return this.http
+      .put(
+        this.pizzaDeleteSelectedUrl,
+        JSON.stringify({"pizzas": pizzas}),
+        {headers: this.headers}
+      ).map(this.extractPizzasData)
+      .catch(this.handleError);
+  }
+
+  delete(id: number): Observable<void> {
+    const url = `${this.pizzasUrl}/${id}`;
+    return this.http
+      .delete(
+        url,
+        {headers: this.headers}
+      ).map(() => null)
       .catch(this.handleError);
   }
 }

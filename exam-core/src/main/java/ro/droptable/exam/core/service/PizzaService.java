@@ -16,4 +16,6 @@ public interface PizzaService {
     Pizza updatePizza(Long pizzaId, String name, Float price);
 
     void updateAllPizza(Float dif);
+
+    void deletePizza(Long pizzaId);
 }

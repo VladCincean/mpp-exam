@@ -25,7 +25,7 @@ public class PizzaServiceImpl implements PizzaService {
 //    private IngredientRepository ingredientRepository;
 
     @Override
-    @Transactional
+//    @Transactional
     public List<Pizza> findAll() {
         log.trace("findAll");
 
@@ -76,5 +76,15 @@ public class PizzaServiceImpl implements PizzaService {
         pizzaRepository.updateAllPrice(dif);
 
         log.trace("updateAllPizza -- method end");
+    }
+
+    @Override
+    @Transactional
+    public void deletePizza(Long pizzaId) {
+        log.trace("deletePizza: pizzaId={}", pizzaId);
+
+        pizzaRepository.delete(pizzaId);
+
+        log.trace("deletePizza - method end");
     }
 }

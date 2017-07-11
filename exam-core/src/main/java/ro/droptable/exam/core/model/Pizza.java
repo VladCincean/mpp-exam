@@ -27,7 +27,7 @@ import java.util.Set;
 @Setter
 @Builder
 public class Pizza extends BaseEntity<Long> {
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column(name = "description")
@@ -38,7 +38,7 @@ public class Pizza extends BaseEntity<Long> {
 
     @OneToMany(
             mappedBy = "pizza",
-            cascade = CascadeType.ALL,
+//            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, // default
             orphanRemoval = true
     )

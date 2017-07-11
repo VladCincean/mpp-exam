@@ -4,8 +4,9 @@ import {IngredientListComponent} from "./pizzas/ingredient-list/ingredient-list.
 import {NgModule} from "@angular/core";
 
 const routes: Routes = [
-  { path: 'pizzashop2010/pizzas', component: PizzaListComponent },
-  { path: 'pizzashop2010/pizza/:id', component: IngredientListComponent },
+  { path: 'pizzashopre10/pizzas', component: PizzaListComponent },
+  // { path: 'pizzashop2010/pizzas', component: PizzaListComponent },
+  // { path: 'pizzashop2010/pizza/:id', component: IngredientListComponent },
 ];
 
 @NgModule({

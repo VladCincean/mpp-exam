@@ -95,4 +95,63 @@ public class PizzaController {
 
         return new PizzasDto(pizzaConverter.convertModelsToDtos(pizzas));
     }
+
+    @RequestMapping(value = "pizzas/{pizzaId}", method = RequestMethod.DELETE)
+    public ResponseEntity deletePizza(
+            @PathVariable final Long pizzaId
+    ) {
+        log.trace("deletePizza: pizzaId={}", pizzaId);
+
+        pizzaService.deletePizza(pizzaId);
+
+        log.trace("deletePizza - method end");
+
+        return new ResponseEntity(new EmptyJsonResponse(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "pizzas/deleteSelected", method = RequestMethod.PUT)
+    public PizzasDto deleteSelected(
+            @RequestBody final Map<String, PizzaDto[]> pizzasDtoMap
+    ) {
+        log.trace("deleteSelected: pizzasDtoMap = {}", pizzasDtoMap);
+
+        PizzaDto[] pizzasDto = pizzasDtoMap.get("pizzas");
+        log.trace("deleteSelected: pizzasDto.length = {}", pizzasDto.length);
+
+        Set<PizzaDto> dtos = new HashSet<>(Arrays.asList(pizzasDto));
+        log.trace("deleteSelected: dtos = {}", dtos);
+
+        Set<Long> idsToDelete = this.pizzaConverter.convertDTOsToIDs(dtos);
+        for (Long id : idsToDelete) {
+            this.pizzaService.deletePizza(id);
+        }
+
+        List<Pizza> pizzas = pizzaService.findAll();
+
+        log.trace("deleteSelected: pizzas = {}", pizzas);
+
+        return new PizzasDto(pizzaConverter.convertModelsToDtos(pizzas));
+    }
+
+    // TODO: DONE: backup
+//    @RequestMapping(value = "pizzas/deleteSelected", method = RequestMethod.PUT)
+//    public PizzasDto deleteSelected(
+//            @RequestBody final Map<String, PizzasDto> pizzasDtoMap
+//    ) {
+//        log.trace("deleteSelected: pizzasDtoMap = {}", pizzasDtoMap);
+//
+//        PizzasDto pizzasDto = pizzasDtoMap.get("pizzas");
+//        log.trace("deleteSelected: pizzasDto = {}", pizzasDto);
+//
+//        Set<Long> idsToDelete = this.pizzaConverter.convertDTOsToIDs(pizzasDto.getPizzas());
+//        for (Long id : idsToDelete) {
+//            this.pizzaService.deletePizza(id);
+//        }
+//
+//        List<Pizza> pizzas = pizzaService.findAll();
+//
+//        log.trace("deleteSelected: pizzas = {}", pizzas);
+//
+//        return new PizzasDto(pizzaConverter.convertModelsToDtos(pizzas));
+//    }
 }

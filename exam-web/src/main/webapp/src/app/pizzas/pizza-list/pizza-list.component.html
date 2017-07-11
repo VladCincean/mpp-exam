@@ -1,21 +1,23 @@
 <h2>Pizzas</h2>
 <ol class="pizzas">
-  <li
-    *ngFor="let pizza of pizzas"
-    >
-    <!--[class.selected]="pizza === selectedPizza"-->
-    <!--(click)="onSelect(pizza)"-->
-    <!--&gt;-->
-    <label (click)="gotoIngredients(pizza)"> {{pizza.name}} </label>
-    <input [(ngModel)]="pizza.price" placeholder="price">
-    <button (click)="updateOne(pizza)">Update</button>
+  <li *ngFor="let pizza of pizzas">
+    <label> {{pizza.name}} | {{pizza.price}} </label>
+    <input type="checkbox" [checked]="isChecked(pizza)" (change)="handleCheckboxChangeEvent(pizza)" />
+
+    <!--<label (click)="gotoIngredients(pizza)"> {{pizza.name}} </label>-->
+    <!--<input [(ngModel)]="pizza.price" placeholder="price">-->
+    <!--<button (click)="updateOne(pizza)">Update</button>-->
   </li>
 </ol>
 
 <br />
 
-<h2>Update all</h2>
-<div>
-  <input [(ngModel)]="priceAll" placeholder="textFieldPriceAll">
-  <button (click)="updateAll()">Update All</button>
-</div>
+<button (click)="handleDeleteSelectedClick()">delete selected</button>
+<button (click)="handleDeleteStepByStepClick()">delete step by step</button>
+
+<!--<h2>Update all</h2>-->
+<!--<div>-->
+  <!--<input [(ngModel)]="priceAll" placeholder="textFieldPriceAll">-->
+  <!--<button (click)="updateAll()">Update All</button>-->
+<!--</div>-->
+
